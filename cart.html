@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Cart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🛒 Your Cart</h1>
+  <div id="cart-items"></div>
+   <br>
+<button onclick="clearCart()">🗑️ Clear Cart</button>
+<button onclick="checkout()">✅ Checkout</button>
+
+
+  <script>
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const container = document.getElementById("cart-items");
+
+  if (cart.length === 0) {
+    container.innerHTML = "<p>Your cart is empty 😔</p>";
+  } else {
+    cart.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "product";
+      div.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <h3>${item.name}</h3>
+        <p>₹${item.price}</p>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function clearCart() {
+    localStorage.removeItem("cart");
+    alert("Cart cleared!");
+    location.reload();
+  }
+
+  function checkout() {
+    alert("Thank you for your order! 🧾\n(Checkout is just a demo)");
+    clearCart();
+  }
+</script>
+
+    // Get cart items from localStorage
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const container = document.getElementById("cart-items");
+
+    if (cart.length === 0) {
+      container.innerHTML = "<p>Your cart is empty 😔</p>";
+    } else {
+      cart.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "product";
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p>₹${item.price}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
